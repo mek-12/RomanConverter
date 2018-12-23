@@ -1,0 +1,31 @@
+﻿<Window x:Class="RomanConvertApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RomanConvertApp"
+        mc:Ignorable="d"
+        Title="Roman Num Converter" Height="450" Width="450">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="245*"/>
+            <RowDefinition Height="174*"/>
+        </Grid.RowDefinitions>
+        <Border CornerRadius="20" Background="PaleVioletRed"  BorderBrush="Red" BorderThickness="1" HorizontalAlignment="Left" Height="46" Margin="10,10,0,0" VerticalAlignment="Top" Width="422">
+            <Label Content="Roman Numeral Converter" FontSize="24" HorizontalAlignment="Center" FontWeight="Bold" />
+        </Border>
+        <Border CornerRadius="5" Background="#FFE4E4E4" BorderBrush="#FFE4E4E4" BorderThickness="1" HorizontalAlignment="Left" Height="336" Margin="10,73,0,0" VerticalAlignment="Top" Width="422" Grid.RowSpan="2">
+            <TextBox Name="InputNumber" MaxLength="4" TextWrapping="Wrap" Text="" Margin="101,72,114,238" DataContextChanged="InputNumber_DataContextChanged" />
+        </Border>
+        <Label Content="Convert numbers to Roman numerals," FontStyle="Italic" HorizontalAlignment="Left" Margin="109,105,0,0" VerticalAlignment="Top" Height="26" Width="214"/>
+        <Label Content="Convert Roman numerals to numbers." FontStyle="Italic" HorizontalAlignment="Left" Margin="109,123,0,0" VerticalAlignment="Top" Height="26" Width="214"/>
+        <Button Name="ClearButton" Content="Clear" HorizontalAlignment="Left" VerticalAlignment="Top" Width="94" Margin="24,207,0,0" Height="28"/>
+        <Button Name="ConvertButton" Content="Convert" HorizontalAlignment="Left" VerticalAlignment="Top" Width="94" Margin="325,207,0,0" Height="28" Click="ConvertButton_Click"/>
+        <Border Background="White" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="154" Margin="24,0,0,0" VerticalAlignment="Top" Width="395" Grid.Row="1"/>
+        <Separator HorizontalAlignment="Left" Margin="24,0,0,0" Grid.Row="1" Width="395" Height="154" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="32,10,0,0" Grid.Row="1" TextWrapping="Wrap" Text="ANSWER :" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="32,83,0,0" Grid.Row="1" TextWrapping="Wrap" Text="STATUS :" VerticalAlignment="Top"/>
+        <Label Name="StatusLabel" Content="" HorizontalAlignment="Left" Margin="109,102,0,0" Grid.Row="1" VerticalAlignment="Top" Width="214"/>
+        <Label x:Name="Result" Content="" HorizontalAlignment="Left" Margin="109,36,0,0" Grid.Row="1" VerticalAlignment="Top" Width="214"/>
+    </Grid>
+</Window>
