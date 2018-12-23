@@ -9,11 +9,16 @@ namespace RomanConvertApp.BLL
     public static class RomanConverter
     {
 
-        private static string[] romanChars = { "", "I", "V", "X", "C", "D", "M", "L" };
-        private static string[] huns = { "", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM" };
-        private static string[] tens = { "", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC" };
-        private static string[] ones = { "", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX" };
+        private static string[] romanChars = { ".", "I", "V", "X", "C", "D", "M", "L" };
+        private static string[] huns = { ".", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM" };
+        private static string[] tens = { ".", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC" };
+        private static string[] ones = { ".", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX" };
 
+        //Charecter off huns,ones and tens
+
+        private static char[] chuns= {'C','D','M'};
+        private static char[] ctens = { 'X', 'L', 'C' };
+        private static char[] cones = { 'I', 'V', 'X' };
         public static string ConvertToRoman( string input)
         {
             int length = input.Length;
@@ -61,72 +66,42 @@ namespace RomanConvertApp.BLL
         {
             string result = "";
 
-            result = GetOnesToNumber(ref roman)+ result;
-            result = GetTensToNumber(ref roman) + result;
-            result = GetHunsToNumber(ref roman) + result;
+            result = GetOnesToNumber(ref roman, ones, cones)+ result;
+            result = GetTensToNumber(ref roman, tens, ctens) + result;
+            result = GetHunsToNumber(ref roman, huns, chuns) + result;
 
             return result;
         }
 
 
-        private static string GetOnesToNumber(ref string roman)
+        private static string GetOnesToNumber(ref string roman, string[] array, char[] chars)
         {
-            string queryRoman = "";
-            string realRoman = "";
-            int realNumber;
-
-            int romanLength = roman.Length;
-            //Special case (IX)
-            if (roman[romanLength - 1 ] == 'X')
-            {
-                if(roman[romanLength -2] == 'I')
-                {
-                    roman = roman.Substring(0, romanLength - 2);
-                    return "9";
-                }
-                return "0";
-            }
-
-            //If the last character is "I" or "V"
-            if (roman[romanLength - 1]=='I' || roman[romanLength - 1] == 'V')
-            {
-                for(int i = 1; i<=4; i++)
-                {
-                    queryRoman = roman[romanLength - i].ToString() + queryRoman;
-                    if (ones.Contains(queryRoman))
-                    {
-                        realRoman = queryRoman;
-                    }
-                    else if(realRoman != "")
-                    {
-                        roman = roman.Substring(0,(romanLength - i + 1));
-                        realNumber = Array.IndexOf(ones, realRoman);
-                        queryRoman = "";
-                        realRoman = "";
-                        return (realNumber).ToString();
-                    }
-                    else
-                    {
-                        queryRoman = "";
-                        return "0";
-                    }
-                }
-            }
-
-            return "";
+            return GetNumberForRoman(ref roman, array, chars);
         }
 
-        private static string GetTensToNumber(ref string roman)
+        private static string GetTensToNumber(ref string roman, string[] array, char[] chars)
+        {
+            
+            return GetNumberForRoman(ref roman, array, chars);
+        }
+
+        private static string GetHunsToNumber(ref string roman, string[] array, char[] chars)
+        {
+            return GetNumberForRoman(ref roman, array,chars);
+        }
+
+
+        private static string GetNumberForRoman(ref string roman, string[] array, char[] chars)
         {
             string queryRoman = "";
             string realRoman = "";
             int realNumber;
 
             int romanLength = roman.Length;
-            //Special case (XC)
-            if (roman[romanLength - 1] == 'C')
+            //Special case 
+            if (roman[romanLength - 1] == chars[2])
             {
-                if (roman[romanLength - 2] == 'X')
+                if (roman[romanLength - 2] == chars[0])
                 {
                     roman = roman.Substring(0, romanLength - 2);
                     return "9";
@@ -134,19 +109,20 @@ namespace RomanConvertApp.BLL
                 return "0";
             }
 
-            if (roman[romanLength - 1] == 'X' || roman[romanLength - 1] == 'L')
+            //If the last character is "special1" or "secial2"
+            if (roman[romanLength - 1] == chars[0] || roman[romanLength - 1] == chars[1])
             {
                 for (int i = 1; i <= 4; i++)
                 {
                     queryRoman = roman[romanLength - i].ToString() + queryRoman;
-                    if (tens.Contains(queryRoman))
+                    if (array.Contains(queryRoman))
                     {
                         realRoman = queryRoman;
                     }
                     else if (realRoman != "")
                     {
                         roman = roman.Substring(0, (romanLength - i + 1));
-                        realNumber = Array.IndexOf(tens, realRoman);
+                        realNumber = Array.IndexOf(array, realRoman);
                         queryRoman = "";
                         realRoman = "";
                         return (realNumber).ToString();
@@ -158,11 +134,7 @@ namespace RomanConvertApp.BLL
                     }
                 }
             }
-            return "";
-        }
 
-        private static string GetHunsToNumber(ref string roman)
-        {
             return "";
         }
     }

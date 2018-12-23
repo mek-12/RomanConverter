@@ -49,7 +49,7 @@ namespace RomanConvertApp
                 if (isRomanNum)
                 {
                     StatusLabel.Content = "Yes, this is a roman number.";
-                    Result.Content = RomanConverter.ConvertToNumber(input);
+                    Result.Content = RomanConverter.ConvertToNumber(" " +input);
                     return;
                 }
                 StatusLabel.Content = "Please enter in integer or roman";
