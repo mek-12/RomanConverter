@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RomanConvertApp.BLL
 {
@@ -19,19 +16,19 @@ namespace RomanConvertApp.BLL
         private static char[] chuns= {'C','D','M'};
         private static char[] ctens = { 'X', 'L', 'C' };
         private static char[] cones = { 'I', 'V', 'X' };
-        public static string ConvertToRoman( string input)
+        public static string ConvertToRoman(string input)
         {
             int length = input.Length;
             string result = "";
             int number;
 
-            for (int i = (length - 1); i >= 0; i--)
+            for (int i = 0; i < length; i++)
             {
-                number = Int32.Parse(input[i].ToString());
-                if (number != 0) 
+                number = Int32.Parse(input[length - i - 1].ToString());
+                if (number != 0)
                 {
-                    result = GetRomanFromStep(i, number) + result;
-                } 
+                    result = GetRomanFromStep(i, number)+ result;
+                }
             }
 
             return result;
@@ -43,6 +40,12 @@ namespace RomanConvertApp.BLL
             switch (step)
             {
                 case 0:
+                    return ones[number];
+                case 1:
+                    return tens[number];
+                case 2:
+                    return huns[number];
+                case 3:
                     string thsand = "";
 
                     for (int i = 0; i < number; i++)
@@ -50,12 +53,7 @@ namespace RomanConvertApp.BLL
                         thsand = thsand + "M";
                     }
                     return thsand;
-                case 1:
-                    return huns[number];
-                case 2:
-                    return tens[number];
-                case 3:
-                    return ones[number];
+                    
             }
             return "";
         }
@@ -69,10 +67,9 @@ namespace RomanConvertApp.BLL
             result = GetOnesToNumber(ref roman, ones, cones)+ result;
             result = GetTensToNumber(ref roman, tens, ctens) + result;
             result = GetHunsToNumber(ref roman, huns, chuns) + result;
-
+            result = GetThusToNumber(ref roman) + result;
             return result;
         }
-
 
         private static string GetOnesToNumber(ref string roman, string[] array, char[] chars)
         {
@@ -90,6 +87,10 @@ namespace RomanConvertApp.BLL
             return GetNumberForRoman(ref roman, array,chars);
         }
 
+        private static string GetThusToNumber(ref string roman)
+        {
+            return (roman.Length-1).ToString() ;
+        }
 
         private static string GetNumberForRoman(ref string roman, string[] array, char[] chars)
         {

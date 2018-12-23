@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+﻿using System.Text.RegularExpressions;
 
 namespace RomanConvertApp.BLL
 {
@@ -24,7 +19,7 @@ namespace RomanConvertApp.BLL
         {
             if (regexRoman == null)
             {
-                regexRoman = new Regex(@"^[I|V|X|C|D|M|L]*$");
+                regexRoman = new Regex(@"^(?=[MDCLXVI])M*(C[MD]|D?C{0,3})(X[CL]|L?X{0,3})(I[XV]|V?I{0,3})$");
             }
             return regexRoman;
         }

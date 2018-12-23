@@ -1,18 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows;
 using RomanConvertApp.BLL;
 
 namespace RomanConvertApp
@@ -35,11 +21,17 @@ namespace RomanConvertApp
 
             if(input != "")
             {
+
                 isNumber = BooleanManager.IsANumber(input);
 
                 if (isNumber)
                 {
                     StatusLabel.Content = "Yes, this is a integer.";
+                    if(input.Length >4)
+                    {
+                        Result.Content = "Min 4 digit";
+                        return;
+                    }
                     Result.Content = RomanConverter.ConvertToRoman(input);
                     return;
                 }
@@ -62,6 +54,13 @@ namespace RomanConvertApp
 
         private void InputNumber_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
+        }
+
+        private void ClearButton_Click(object sender, RoutedEventArgs e)
+        {
+            InputNumber.Text = "";
+            Result.Content = "";
+            StatusLabel.Content = "";
         }
     }
 }
