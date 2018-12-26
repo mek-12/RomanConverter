@@ -27,9 +27,9 @@ namespace RomanConvertApp
                 if (isNumber)
                 {
                     StatusLabel.Content = "Yes, this is a integer.";
-                    if(input.Length >4)
+                    if(input.Length > 4)
                     {
-                        Result.Content = "Min 4 digit";
+                        Result.Content = "Max 4 digit";
                         return;
                     }
                     Result.Content = RomanConverter.ConvertToRoman(input);

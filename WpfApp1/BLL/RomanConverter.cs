@@ -136,7 +136,7 @@ namespace RomanConvertApp.BLL
                 }
             }
 
-            return "";
+            return "0";
         }
     }
 }
