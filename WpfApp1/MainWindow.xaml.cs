@@ -13,13 +13,13 @@ namespace RomanConvertApp
             InitializeComponent();
         }
 
-        private void ConvertButton_Click(object sender, RoutedEventArgs e)
+        private void InputNumber_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
             var input = InputNumber.Text.Replace(" ", string.Empty);
             bool isNumber = false;
             bool isRomanNum = false;
 
-            if(input != "")
+            if (input != "")
             {
 
                 isNumber = BooleanManager.IsANumber(input);
@@ -27,7 +27,7 @@ namespace RomanConvertApp
                 if (isNumber)
                 {
                     StatusLabel.Content = "Yes, this is a integer.";
-                    if(input.Length > 4)
+                    if (input.Length > 4)
                     {
                         Result.Content = "Max 4 digit";
                         return;
@@ -41,26 +41,18 @@ namespace RomanConvertApp
                 if (isRomanNum)
                 {
                     StatusLabel.Content = "Yes, this is a roman number.";
-                    Result.Content = RomanConverter.ConvertToNumber(" " +input);
+                    Result.Content = RomanConverter.ConvertToNumber(" " + input);
                     return;
                 }
                 StatusLabel.Content = "Please enter in integer or roman";
+                StatusLabel.Content = "Is No valid. Try again.";
+
                 return;
             }
-            StatusLabel.Content = "Is No valid. Try again.";
+
+            StatusLabel.Content = string.Empty;
+            Result.Content = string.Empty;
             return;
-            
-        }
-
-        private void InputNumber_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-        }
-
-        private void ClearButton_Click(object sender, RoutedEventArgs e)
-        {
-            InputNumber.Text = "";
-            Result.Content = "";
-            StatusLabel.Content = "";
         }
     }
 }

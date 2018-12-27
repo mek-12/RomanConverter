@@ -15,12 +15,10 @@
             <Label Content="Roman Numeral Converter" FontSize="24" HorizontalAlignment="Center" FontWeight="Bold" />
         </Border>
         <Border CornerRadius="5" Background="#FFE4E4E4" BorderBrush="#FFE4E4E4" BorderThickness="1" HorizontalAlignment="Left" Height="336" Margin="10,73,0,0" VerticalAlignment="Top" Width="422" Grid.RowSpan="2">
-            <TextBox Name="InputNumber"  TextWrapping="Wrap" Text="" Margin="101,72,114,238" DataContextChanged="InputNumber_DataContextChanged" />
+            <TextBox Name="InputNumber"  TextWrapping="Wrap" Text="" Margin="101,72,114,238" TextChanged="InputNumber_TextChanged" />
         </Border>
         <Label Content="Convert numbers to Roman numerals," FontStyle="Italic" HorizontalAlignment="Left" Margin="109,105,0,0" VerticalAlignment="Top" Height="26" Width="214"/>
         <Label Content="Convert Roman numerals to numbers." FontStyle="Italic" HorizontalAlignment="Left" Margin="109,123,0,0" VerticalAlignment="Top" Height="26" Width="214"/>
-        <Button Name="ClearButton" Content="Clear" HorizontalAlignment="Left" VerticalAlignment="Top" Width="94" Margin="24,207,0,0" Height="28" Click="ClearButton_Click"/>
-        <Button Name="ConvertButton" Content="Convert" HorizontalAlignment="Left" VerticalAlignment="Top" Width="94" Margin="325,207,0,0" Height="28" Click="ConvertButton_Click"/>
         <Border Background="White" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="154" Margin="24,0,0,0" VerticalAlignment="Top" Width="395" Grid.Row="1"/>
         <Separator HorizontalAlignment="Left" Margin="24,0,0,0" Grid.Row="1" Width="395" Height="154" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="32,10,0,0" Grid.Row="1" TextWrapping="Wrap" Text="ANSWER :" VerticalAlignment="Top"/>
